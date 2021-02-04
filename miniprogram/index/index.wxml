@@ -1,0 +1,54 @@
+<!--index.wxml-->
+<view class="container" style="width: 100%; position: relative;">
+  <!-- <view>{{fromScene}}</view> -->
+  <image class="bg-image" mode="widthFix" src="./bg.png"></image>
+  <!-- <text style="font-size: 10rpx; position: absolute; bottom: 0; color: goldenrod;">{{scene}}</text> -->
+
+  <view class="block-wrapper" style="top: 23%; height: 6%;">
+    <text style="color: #be472f; font-size: 34rpx;">{{drawing?'正在抽福卡':(allGot?'中奖啦':newBlessingName)}}</text>
+  </view>
+  <view class="block-wrapper" style="top: 30%; height: 35%; align-items: flex-start;">
+    <view class="flex-wrp message-text" wx:if="{{message}}">
+      {{message}}
+    </view>
+    <image wx:elif="{{drawing}}" class="waiting-image center-image" mode="widthFix" src="./question.png"></image>
+    <view class="flex-wrp" wx:elif="{{userinfo}}"
+      style="display:flex; height: 100%; width: 66%; flex-direction: column;text-align: center; background-color: #fefefe;">
+      <view style="margin-bottom: 20rpx; color: #be472f; font-weight: bold; font-size: 40rpx;">
+        {{userinfo.name}}({{userinfo.id}})</view>
+      <image style="width:100%;" mode="widthFix" src="./info.png"></image>
+    </view>
+    <view wx:elif="{{allGot}}"
+      style="height: 100%; width: 50%; display:flex; flex-direction: column; text-align: center; justify-content: space-evenly;">
+      <view style="color: goldenrod;">填写信息</view>
+      <input class="weui-input" bindinput="inputId" placeholder="工号" />
+      <input class="weui-input" bindinput="inputName" placeholder="姓名" />
+      <button type="primary" plain="true" bindtap="saveUserInfo" style="margin-bottom: 40%;">去领奖</button>
+      <loading wx:if="{{settinginfo}}">正在保存信息...</loading>
+    </view>
+    <image wx:elif="{{newBlessingName}}" class="center-image" mode="widthFix" src="./{{newBlessingKey}}.png"></image>
+    <view class="flex-wrp message-text" wx:elif="{{!isFromScan && !gettingBlessing}}">
+      需要扫码抽奖哦
+    </view>
+  </view>
+  <view class="block-wrapper" style="top: 71%; height: 13%;">
+    <view style="display: flex; justify-content: space-around;  width: 79%; height: 100%;">
+      <view class="blessing" wx:for="{{blessings}}" wx:key="{{item.key}}">
+        <view class="count-badge">{{item.count}}</view>
+        <image style="width: 100%;" mode="widthFix" src="./{{item.count?item.key:'question'}}.png"></image>
+        <text style="color: #ebbfc0;">{{item.name}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- <block wx:elif="{{newBlessingName === false }}">
+      
+      
+    </block> -->
+  <!-- <view style="height: 30%; width: 100%; display: flex; justify-content: space-around; flex-direction:column;">
+    <view class="flex-wrp" style="flex: 0 0 40px;">
+      <text class="blessing-name">我的福卡</text>
+    </view>
+    
+  </view> -->
+</view>

@@ -1,0 +1,93 @@
+.blessing {
+  flex: 0 0 20%;
+  font-size: 26rpx;
+  text-align: center;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  position: relative;
+}
+
+.weui-input {
+  height: 2.58823529em;
+  min-height: 2.58823529em;
+  line-height: 2.58823529em;
+  border: 1px solid #D9D9D9;
+}
+
+.message-text{
+  display:flex; height: 60%; width: 66%; justify-content: center; flex-direction: column;text-align: center;color: #be472f; font-weight: bold; font-size: 40rpx;
+}
+
+.count-badge{
+  position: absolute;
+  right: 0;
+  top: 10rpx;
+  background-color: #f1ce9f;
+  color: #bc472e;
+  border-radius: 50%;
+  width: 34rpx;
+  height: 34rpx;
+  font-size: 20rpx;
+  line-height: 34rpx;
+  box-shadow: 0px 2px 6px 0px #423e3e;
+}
+
+.block-wrapper {
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.bg-image {
+  width: 100%;
+}
+
+.center-image {
+  width: 59%;
+}
+
+.waiting-image {
+  animation: rock 1s 0s ease-in-out infinite;
+}
+
+@keyframes rock {
+  0% {
+    transform: rotate(0deg)
+  }
+
+  10% {
+    transform: rotate(8deg)
+  }
+
+  20% {
+    transform: rotate(0deg)
+  }
+
+  30% {
+    transform: rotate(-8deg)
+  }
+
+  35% {
+    transform: rotate(8deg)
+  }
+
+  40% {
+    transform: rotate(-8deg)
+  }
+
+  45% {
+    transform: rotate(8deg)
+  }
+
+  50% {
+    transform: rotate(0deg)
+  }
+
+  100% {
+    transform: rotate(0deg)
+  }
+}
