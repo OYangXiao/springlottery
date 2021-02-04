@@ -13,7 +13,7 @@ const blessingList = [
     percent: 1
   }, {
     name: 'e',
-    percent: 6
+    percent: 16
   }
 ]
 // 从数组中按概率随机生成成员

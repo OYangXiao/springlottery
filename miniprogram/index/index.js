@@ -57,10 +57,19 @@ Page({
     }
   },
   onShow: function () {
-    console.log('on show')
     const that = this
     const isFromScan = [1017, 1011, 1047, 1001].includes(wx.getLaunchOptionsSync().scene)
-    console.log(wx.getLaunchOptionsSync().scene)
+    wx.getStorage({
+      key: 'blessings',
+      success(res) {
+        console.log(res)
+        if (res.data) {
+          that.setData({
+            blessings: res.data
+          })
+        }
+      }
+    })
     this.setData({
       drawing: isFromScan,
       isFromScan,
@@ -73,6 +82,10 @@ Page({
           success: res => {
             const blessings = translateBlessing(that.data.blessings, res.result.hasBlessings)
             const newBlessingName = res.result.newBlessingName === 'e' ? '普通福' : findNewBlessingName(this.data.blessings, res.result.newBlessingName)
+            wx.setStorage({
+              data: blessings,
+              key: 'blessings',
+            })
             that.setData({
               newBlessingKey: res.result.newBlessingName,
               newBlessingName,
@@ -93,6 +106,10 @@ Page({
         name: 'getblessings',
         success: res => {
           const blessings = translateBlessing(that.data.blessings, res.result.hasBlessings)
+          wx.setStorage({
+            data: blessings,
+            key: 'blessings',
+          })
           that.setData({
             gettingBlessing: false,
             newBlessingKey: '',
