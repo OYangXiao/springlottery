@@ -58,7 +58,7 @@ Page({
   },
   onShow: function () {
     const that = this
-    const isFromScan = [1017, 1011, 1047, 1001].includes(wx.getLaunchOptionsSync().scene)
+    const isFromScan = true//[1017, 1011, 1047, 1001].includes(wx.getLaunchOptionsSync().scene)
     wx.getStorage({
       key: 'blessings',
       success(res) {
