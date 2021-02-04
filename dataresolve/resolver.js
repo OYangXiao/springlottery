@@ -2,7 +2,7 @@ var fs = require('fs');
 var readline = require('readline');
 
 //调用方法
-var path = 'database_export-yXZZDx74PbwL.json';
+var path = 'database_export-xxYgIeN55P7V.json';
 read_file(path, function (data) {
   const stats = {
     total: data.length,
@@ -11,7 +11,7 @@ read_file(path, function (data) {
     2: 0,
     3: 0,
     4: 0,
-    finished: []
+    finished: [],
   };
   data.forEach((user) => {
     const set = new Set();
@@ -24,11 +24,15 @@ read_file(path, function (data) {
     });
     const hasBlessings = Array.from(set);
     stats[hasBlessings.length]++;
-    if(hasBlessings.length === 4){
-      stats.finished.push(`${user.userinfo.name}(${user.userinfo.id}) - ${user.history[0].record.length}次`)
+    if (hasBlessings.length === 4) {
+      stats.finished.push(
+        `${user.userinfo.name}(${user.userinfo.id}) - ${
+          user.history.map(day=>day.record).flat().length
+        }次`
+      );
     }
   });
-  console.log(stats)
+  console.log(stats);
 });
 
 //定义读取方法
