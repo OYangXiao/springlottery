@@ -8,7 +8,7 @@ const timeFormatter = new Intl.DateTimeFormat('zh-CN', {
   hour12: false,
 });
 //调用方法
-var path = 'database_export-yRviavDUtey2.json';
+var path = 'database_export-yZKySJQ_4IsJ.json';
 read_file(path, function (data) {
   const stats = {
     参与人数: data.length,
@@ -44,7 +44,10 @@ read_file(path, function (data) {
       finished.sort((a, b) => a.time - b.time);
     }
     stats.完成人员列表 = finished.map(
-      (user) => `${user.name}(${user.id}) - ${user.count}次 - ${timeFormatter.format(new Date(user.time))}`
+      (user) =>
+        `${user.name}${new Array((4 - user.name.length)*2).fill(' ').join('')}- (${user.id}) - ${
+          user.count
+        }次 - ${timeFormatter.format(new Date(user.time))}`
     );
   });
   console.log(stats);
