@@ -1,8 +1,6 @@
 import { createReadStream } from 'fs';
 import { createInterface } from 'readline';
 const timeFormatter = new Intl.DateTimeFormat('zh-CN', {
-  year: 'numeric',
-  month: 'numeric',
   day: 'numeric',
   hour: 'numeric',
   minute: 'numeric',
@@ -10,7 +8,7 @@ const timeFormatter = new Intl.DateTimeFormat('zh-CN', {
   hour12: false,
 });
 //调用方法
-var path = 'database_export-gz16TCBnv1RM.json';
+var path = 'database_export-yRviavDUtey2.json';
 read_file(path, function (data) {
   const stats = {
     参与人数: data.length,
@@ -26,6 +24,7 @@ read_file(path, function (data) {
     '4个福': 0,
     完成人员列表: [],
   };
+  const finished = [];
   data.forEach((user) => {
     const set = new Set();
     let time = undefined;
@@ -41,12 +40,12 @@ read_file(path, function (data) {
     const hasBlessings = Array.from(set);
     stats[`${hasBlessings.length}个福`]++;
     if (hasBlessings.length === 4) {
-      stats.完成人员列表.push(
-        `${user.userinfo.name}(${user.userinfo.id}) - ${
-          user.history.map((day) => day.record).flat().length
-        }次 - ${timeFormatter.format(new Date(time))}`
-      );
+      finished.push({ ...user.userinfo, time, count: user.history.map((day) => day.record).flat().length });
+      finished.sort((a, b) => a.time - b.time);
     }
+    stats.完成人员列表 = finished.map(
+      (user) => `${user.name}(${user.id}) - ${user.count}次 - ${timeFormatter.format(new Date(user.time))}`
+    );
   });
   console.log(stats);
 });
